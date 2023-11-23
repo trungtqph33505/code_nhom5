@@ -1,4 +1,4 @@
-package com.example.duan1_qt;
+package com.example.duan1_qt.model;
 
 public class ClothingItem {
     private int imageResource;

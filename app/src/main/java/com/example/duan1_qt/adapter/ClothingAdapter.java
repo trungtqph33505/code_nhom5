@@ -1,4 +1,4 @@
-package com.example.duan1_qt;
+package com.example.duan1_qt.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.duan1_qt.R;
+import com.example.duan1_qt.model.ClothingItem;
 
 import java.util.ArrayList;
 

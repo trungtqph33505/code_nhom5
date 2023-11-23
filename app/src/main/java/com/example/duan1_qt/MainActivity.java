@@ -1,64 +1,73 @@
 package com.example.duan1_qt;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 
+import com.example.duan1_qt.adapter.ClothingAdapter;
+import com.example.duan1_qt.fragment.frag_giohang;
+import com.example.duan1_qt.fragment.frag_home;
+import com.example.duan1_qt.fragment.frag_thongbao;
+import com.example.duan1_qt.fragment.frag_thongtin;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    frag_giohang fg_giohang;
+    frag_home fg_home;
+    frag_thongbao fg_thongbao;
 
-    private DrawerLayout drawerLayout;
-    private Toolbar toolbar;
+    frag_thongtin fg_thongtin;
+    FragmentManager fm;
+    FrameLayout frameLayout;
+
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        drawerLayout = findViewById(R.id.drawer_layout);
+        fg_thongtin = new frag_thongtin();
+        fg_giohang = new frag_giohang();
+        fg_home = new frag_home();
+        fg_thongbao = new frag_thongbao();
+
+        frameLayout = findViewById(R.id.frameLayout);
+
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
+        fm = getSupportFragmentManager();
+
+        fm.beginTransaction().replace(R.id.frameLayout, fg_home).commit();
 
 
+        bottomNavigationView.setOnItemReselectedListener(new NavigationBarView.OnItemReselectedListener() {
+            @Override
+            public void onNavigationItemReselected(@NonNull MenuItem item) {
+            if (item.getItemId() == R.id.HomePage){
+                fm.beginTransaction().replace(R.id.frameLayout, fg_home).commit();
+            }else if (item.getItemId() == R.id.ThongBao){
+                fm.beginTransaction().replace(R.id.frameLayout, fg_thongbao).commit();
+            }else if (item.getItemId() == R.id.GioHang){
+                fm.beginTransaction().replace(R.id.frameLayout, fg_giohang).commit();
+            }else if (item.getItemId() == R.id.Account){
+                fm.beginTransaction().replace(R.id.frameLayout, fg_thongtin).commit();
+            }
 
+            }
+        });
 
-        NavigationView navigationView = findViewById(R.id.navigation_view);
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        // Xử lý khi một mục trong Navigation Drawer được chọn
-                        int id = menuItem.getItemId();
-                        // Xử lý click vào từng mục menu ở đây
-                        return true;
-                    }
-                });
-
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(
-                this, drawerLayout, toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
-
-        ListView listView = findViewById(R.id.listView);
-        ArrayList<ClothingItem> clothingItems = new ArrayList<>();
-
-        // Thêm các sản phẩm vào danh sách
-        clothingItems.add(new ClothingItem(R.drawable.img_1, "Áo thun Teelab", "150.000đ"));
-        clothingItems.add(new ClothingItem(R.drawable.img_2, "Áo thun Teelab ít họa tiết", "20.000đ"));
-        clothingItems.add(new ClothingItem(R.drawable.img_3, "Áo gió Teelab", "650.000đ"));
-        clothingItems.add(new ClothingItem(R.drawable.img_4, "Áo Bomber NewYork", "1.150.000đ"));
-        clothingItems.add(new ClothingItem(R.drawable.img_5, "Quần Jean ống rộng", "190.000đ"));
-        clothingItems.add(new ClothingItem(R.drawable.img_6, "Quần Jean óng xuông", "250.000đ"));
-        // Thêm sản phẩm khác vào đây
-
-        ClothingAdapter adapter = new ClothingAdapter(this, clothingItems);
-        listView.setAdapter(adapter);
     }
 }
