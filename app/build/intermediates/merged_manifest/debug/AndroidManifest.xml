@@ -44,6 +44,9 @@
         android:testOnly="true"
         android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge" >
         <activity
+            android:name="com.shopeeapp.activity.admin.ListPayActivity"
+            android:exported="false" />
+        <activity
             android:name="com.shopeeapp.activity.admin.ShowPaymentActivity"
             android:exported="false" />
         <activity

@@ -24,6 +24,7 @@ public class ShowAdUserActivity extends AppCompatActivity {
     ImageView back;
     Button crud;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +32,7 @@ public class ShowAdUserActivity extends AppCompatActivity {
 
         UserDbHelper userDbHelper = new UserDbHelper(this);
         ArrayList<User> user = userDbHelper.getAllUser();
-        AdminUserAdapter adapter = new AdminUserAdapter(this, R.layout.admin_user_listview, user);
+        AdminUserAdapter adapter = new AdminUserAdapter(this, R.layout.admin_user_listview, user,userDbHelper);
         listView = findViewById(R.id.listview);
         listView.setAdapter(adapter);
 

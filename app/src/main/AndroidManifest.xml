@@ -29,6 +29,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
         <activity
+            android:name=".activity.admin.ListPayActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.admin.ShowPaymentActivity"
             android:exported="false" />
         <activity

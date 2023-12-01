@@ -1984,6 +1984,10 @@
         "source": "C:\\test\\app\\src\\main\\res\\drawable\\chessboard.png"
     },
     {
+        "merged": "C:\\test\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_list_pay.xml.flat",
+        "source": "C:\\test\\app\\src\\main\\res\\layout\\activity_list_pay.xml"
+    },
+    {
         "merged": "C:\\test\\app\\build\\intermediates\\merged_res\\debug\\drawable-180dpi_icons8_statistics_64.png.flat",
         "source": "C:\\test\\app\\src\\main\\res\\drawable-180dpi\\icons8_statistics_64.png"
     },

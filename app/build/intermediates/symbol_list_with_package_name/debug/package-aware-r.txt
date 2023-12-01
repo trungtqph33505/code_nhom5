@@ -2896,6 +2896,7 @@ id tvNumDiscount
 id tvNumProducts
 id tvSearch
 id tv_product_name
+id tv_show
 id tv_view_more_product
 id tv_view_more_promo
 id txtAdAddressStore
@@ -3054,6 +3055,7 @@ layout activity_admin_store
 layout activity_bar_chart
 layout activity_dash_board
 layout activity_email_password
+layout activity_list_pay
 layout activity_main
 layout activity_product_image
 layout activity_search

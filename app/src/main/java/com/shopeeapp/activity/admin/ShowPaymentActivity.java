@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.shopeeapp.R;
 import com.shopeeapp.adapter.AdminBillAdapter;
@@ -21,6 +22,8 @@ public class ShowPaymentActivity extends AppCompatActivity {
 
     ListView listView;
     ImageView btnback;
+
+    TextView tv;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,9 @@ public class ShowPaymentActivity extends AppCompatActivity {
         ArrayList<Bill> bills = billDbHelper.getAllUnpaidBills();
         AdminBillAdapter adapter = new AdminBillAdapter(this, R.layout.admin_payment_listview, bills);
         listView = findViewById(R.id.listview);
+        tv = findViewById(R.id.tv_show);
+
+
         listView.setAdapter(adapter);
 
         btnback = findViewById(R.id.btnBack);
@@ -41,5 +47,15 @@ public class ShowPaymentActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ShowPaymentActivity.this, ListPayActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
+
 }

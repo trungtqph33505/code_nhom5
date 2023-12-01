@@ -29,6 +29,10 @@ public class Bill {
         this.setPrice(price);
         this.setStatus(status);
     }
+    public Bill(){
+
+    }
+
 
     public Bill(Integer userId, Integer cartId, String phone, String address, Float discount, Float price) {
         this(-1, userId, cartId, phone, address, AppUtilities.getDateTimeNow(), discount, price, BILL_UNPAID);

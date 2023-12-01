@@ -1,5 +1,6 @@
 package com.shopeeapp.dbhelper;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -138,12 +139,67 @@ public class BillDbHelper extends SQLiteOpenHelper {
         return bills;
     }
 
+    public ArrayList<Bill> getAllBillsAdmin() {
+        ArrayList<Bill> bills = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(
+                "SELECT * FROM Bill INNER JOIN Cart ON Bill.cartId = Cart.id",
+               null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Bill bill = cursorToBill(cursor);
+            Cart cart = new Cart(
+                    cursor.getInt(9),
+                    cursor.getInt(10),
+                    cursor.getInt(11),
+                    cursor.getInt(12),
+                    cursor.getString(13)
+            );
+            ProductDbHelper productDbHelper = new ProductDbHelper(this.context);
+            Product product = productDbHelper.getProductById(cart.getProductId());
+            cart.setProduct(product);
+            bill.setCart(cart);
+            bills.add(bill);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return bills;
+    }
+
+
     public ArrayList<Bill> getUnpaidBills(Integer userId) {
         ArrayList<Bill> bills = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(
                 "SELECT * FROM Bill INNER JOIN Cart ON Bill.cartId = Cart.id WHERE Bill.userId = ? AND Bill.status = 'Unpaid'",
                 new String[]{String.valueOf(userId)});
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Bill bill = cursorToBill(cursor);
+            Cart cart = new Cart(
+                    cursor.getInt(9),
+                    cursor.getInt(10),
+                    cursor.getInt(11),
+                    cursor.getInt(12),
+                    cursor.getString(13)
+            );
+            ProductDbHelper productDbHelper = new ProductDbHelper(this.context);
+            Product product = productDbHelper.getProductById(cart.getProductId());
+            cart.setProduct(product);
+            bill.setCart(cart);
+            bills.add(bill);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return bills;
+    }
+
+    public ArrayList<Bill> getUnpaidBillsAdmin() {
+        ArrayList<Bill> bills = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(
+                "SELECT * FROM Bill  INNER JOIN Cart ON Bill.cartId = Cart.id WHERE  Bill.status = 'Unpaid'",
+                null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Bill bill = cursorToBill(cursor);
